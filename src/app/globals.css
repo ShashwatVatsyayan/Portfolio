@@ -1,0 +1,294 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent-indigo: #6366f1;
+  --color-accent-violet: #8b5cf6;
+  --color-accent-cyan: #06b6d4;
+  --color-accent-emerald: #10b981;
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+:root {
+  --background: #030014;
+  --foreground: #ffffff;
+  --glow-indigo: 0 0 40px rgba(99, 102, 241, 0.6);
+  --glow-violet: 0 0 40px rgba(139, 92, 246, 0.6);
+  --glow-cyan: 0 0 40px rgba(6, 182, 212, 0.6);
+  --glass-shadow: 0 12px 48px 0 rgba(0, 0, 0, 0.9);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.12);
+  --circle-start: #a0d9f8;
+  --circle-end: #3a5bbf;
+}
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+  }
+
+  html {
+    overflow-x: hidden;
+    width: 100%;
+    scroll-behavior: smooth;
+  }
+}
+
+/* ================================ */
+/* GLASS UTILITIES                  */
+/* ================================ */
+@layer utilities {
+  .glass {
+    @apply backdrop-blur-xl bg-black/50 border border-white/12 shadow-2xl;
+  }
+  
+  .glass-dark {
+    @apply backdrop-blur-xl bg-black/70 border border-white/8 shadow-2xl;
+  }
+  
+  .glass-card {
+    background: linear-gradient(135deg, rgba(5,5,20,0.8) 0%, rgba(15,15,30,0.6) 100%);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+  }
+
+  .glass-liquid {
+    position: relative;
+    backdrop-filter: blur(3px);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 
+      inset 2px 2px 1px 0 rgba(255, 255, 255, 0.15),
+      inset -1px -1px 1px 1px rgba(255, 255, 255, 0.1),
+      0 6px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+  }
+
+  .text-glow {
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+  }
+  
+  .text-glow-indigo {
+    text-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
+  }
+
+  .text-glow-cyan {
+    text-shadow: 0 0 15px rgba(6, 182, 212, 0.5);
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24 px-4 sm:px-6 md:px-8;
+  }
+  
+  .safe-viewport {
+    @apply max-w-[100vw] overflow-hidden;
+  }
+}
+
+/* ================================ */
+/* GALAXY BACKGROUND                */
+/* ================================ */
+.galaxy-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  background: 
+    radial-gradient(ellipse at 20% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(139, 92, 246, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(6, 182, 212, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #030014 0%, #020010 100%);
+}
+
+/* ================================ */
+/* STAR FIELD                       */
+/* ================================ */
+.stars-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -9;
+  pointer-events: none;
+}
+
+.stars-layer::before,
+.stars-layer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.6) 50%, transparent 50%),
+    radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,0.4) 50%, transparent 50%),
+    radial-gradient(1px 1px at 50% 10%, rgba(255,255,255,0.5) 50%, transparent 50%),
+    radial-gradient(1px 1px at 70% 40%, rgba(255,255,255,0.3) 50%, transparent 50%),
+    radial-gradient(1px 1px at 90% 70%, rgba(255,255,255,0.6) 50%, transparent 50%),
+    radial-gradient(1.5px 1.5px at 15% 80%, rgba(255,255,255,0.5) 50%, transparent 50%),
+    radial-gradient(1px 1px at 45% 35%, rgba(255,255,255,0.4) 50%, transparent 50%),
+    radial-gradient(1.5px 1.5px at 65% 85%, rgba(255,255,255,0.3) 50%, transparent 50%),
+    radial-gradient(1px 1px at 85% 15%, rgba(255,255,255,0.5) 50%, transparent 50%),
+    radial-gradient(1px 1px at 25% 45%, rgba(255,255,255,0.4) 50%, transparent 50%);
+  background-size: 400px 400px;
+  animation: starDrift 120s linear infinite;
+}
+
+.stars-layer::after {
+  background-size: 600px 600px;
+  opacity: 0.5;
+  animation: starDrift 200s linear infinite reverse;
+}
+
+@keyframes starDrift {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-400px, -400px); }
+}
+
+/* ================================ */
+/* ANIMATIONS                       */
+/* ================================ */
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(1000%); }
+}
+
+.animate-scan {
+  animation: scan 4s linear infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 15px rgba(99, 102, 241, 0.3); }
+  50% { box-shadow: 0 0 30px rgba(99, 102, 241, 0.6); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* ================================ */
+/* CYBER MODE (data beams)          */
+/* ================================ */
+.scene {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: -10;
+  background: radial-gradient(ellipse at 50% 100%, #0a1628 0%, #050a14 50%, #020408 100%);
+}
+
+.floor {
+  position: absolute;
+  bottom: 0;
+  left: -50%;
+  right: -50%;
+  height: 60%;
+  background: linear-gradient(to top, rgba(0, 255, 136, 0.03) 0%, transparent 100%);
+  transform: perspective(500px) rotateX(60deg);
+  transform-origin: bottom center;
+}
+
+.main-column {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 2px;
+  height: 100%;
+  transform: translateX(-50%);
+  background: linear-gradient(to top, rgba(0, 255, 136, 0.2), transparent 80%);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+}
+
+.light-stream-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.light-beam {
+  position: absolute;
+  bottom: -10%;
+  height: 15%;
+  background: linear-gradient(to top, rgba(0, 255, 136, 0.6), rgba(0, 255, 136, 0));
+  border-radius: 2px;
+  animation:
+    rise 5s ease-out infinite,
+    fade 5s ease-out infinite,
+    drop 4s ease-in infinite;
+  animation-fill-mode: both;
+}
+
+@keyframes rise {
+  0% { transform: translateY(0); }
+  60% { transform: translateY(-600%); }
+  100% { transform: translateY(-600%); }
+}
+
+@keyframes fade {
+  0% { opacity: 0.8; }
+  60% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+@keyframes drop {
+  0%, 60% { transform: translateY(-600%); }
+  100% { transform: translateY(0); }
+}
+
+/* ================================ */
+/* CINEMATIC OVERLAYS               */
+/* ================================ */
+.film-grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+.vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.5) 100%);
+}
+
+/* ================================ */
+/* 8-BIT 404 PAGE                   */
+/* ================================ */
+.retro {
+  font-family: 'Press Start 2P', monospace, var(--font-mono);
+  image-rendering: pixelated;
+}
+
+.pixelated {
+  image-rendering: pixelated;
+}
+
+/* ================================ */
+/* SCROLLBAR                        */
+/* ================================ */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.3);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.5);
+}
