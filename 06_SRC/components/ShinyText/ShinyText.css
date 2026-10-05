@@ -1,0 +1,72 @@
+/* ═══════════════════════════════════════════════════════════
+   SHINY TEXT COMPONENT
+   Refined metallic light sweep signature identity
+   ═══════════════════════════════════════════════════════════ */
+
+.shiny-text-section {
+  position: relative;
+  width: 100%;
+  padding: clamp(6rem, 14vh, 10rem) clamp(1.5rem, 4vw, 4rem) clamp(3rem, 6vh, 5rem);
+  text-align: center;
+  background: #000000;
+  overflow: hidden;
+}
+
+.shiny-text {
+  display: inline-block;
+  font-family: var(--display, 'Cabinet Grotesk', sans-serif);
+  font-weight: 900;
+  font-size: clamp(2.8rem, 7.5vw, 7.5rem);
+  line-height: 0.95;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #b5b5b5;
+  background: linear-gradient(
+    120deg,
+    rgba(181, 181, 181, 0.7) 0%,
+    rgba(181, 181, 181, 0.7) 35%,
+    #ffffff 50%,
+    rgba(181, 181, 181, 0.7) 65%,
+    rgba(181, 181, 181, 0.7) 100%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shineSweep 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  user-select: none;
+  filter: drop-shadow(0 2px 20px rgba(255, 255, 255, 0.08));
+}
+
+@keyframes shineSweep {
+  0% {
+    background-position: 120% 0;
+  }
+  100% {
+    background-position: -120% 0;
+  }
+}
+
+.shiny-text-subtitle {
+  font-family: var(--mono, 'Space Grotesk', monospace);
+  font-size: clamp(0.68rem, 1vw, 0.85rem);
+  letter-spacing: 0.38em;
+  color: rgba(232, 228, 220, 0.55);
+  text-transform: uppercase;
+  margin-top: 1.8rem;
+}
+
+.shiny-text-subtitle span {
+  color: var(--blood-hot, #ff2b2b);
+  margin: 0 0.5rem;
+  opacity: 0.8;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shiny-text {
+    animation: none;
+    background: none;
+    -webkit-text-fill-color: #e8e4dc;
+    color: #e8e4dc;
+  }
+}

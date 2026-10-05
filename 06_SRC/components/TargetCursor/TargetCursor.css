@@ -1,0 +1,124 @@
+/* ═══════════════════════════════════════════════════════════
+   TARGET CURSOR — MINIMAL ROTATING CROSSHAIR / TARGET RETICLE
+   ═══════════════════════════════════════════════════════════ */
+
+/* Hide default cursor when active */
+html.hide-default-cursor,
+html.hide-default-cursor * {
+  cursor: none !important;
+}
+
+.target-cursor-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 99999;
+  will-change: transform;
+}
+
+.target-cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  margin-left: -16px;
+  margin-top: -16px;
+  pointer-events: none;
+  transition: 
+    width 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    margin 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.28s ease;
+}
+
+/* Central dot */
+.target-cursor__center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  margin-left: -2px;
+  margin-top: -2px;
+  border-radius: 50%;
+  background: var(--blood-hot, #ff2b2b);
+  box-shadow: 0 0 6px rgba(255, 43, 43, 0.8);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* Rotating reticle ring with compass ticks */
+.target-cursor__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  animation: targetCursorSpin var(--spin-duration, 2s) linear infinite;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+/* 4 minimal corner / crosshair brackets */
+.target-cursor__brackets {
+  position: absolute;
+  inset: -2px;
+  pointer-events: none;
+  animation: targetCursorSpin var(--spin-duration, 2s) linear infinite;
+}
+
+.target-cursor__brackets::before,
+.target-cursor__brackets::after {
+  content: '';
+  position: absolute;
+  border-color: var(--blood-hot, #ff2b2b);
+  border-style: solid;
+  width: 6px;
+  height: 6px;
+}
+
+.target-cursor__brackets::before {
+  top: 0;
+  left: 0;
+  border-width: 1.5px 0 0 1.5px;
+}
+
+.target-cursor__brackets::after {
+  bottom: 0;
+  right: 0;
+  border-width: 0 1.5px 1.5px 0;
+}
+
+@keyframes targetCursorSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* State when hovering a .cursor-target element */
+.target-cursor.is-locked {
+  width: 48px;
+  height: 48px;
+  margin-left: -24px;
+  margin-top: -24px;
+}
+
+.target-cursor.is-locked .target-cursor__ring {
+  border-color: rgba(255, 43, 43, 0.7);
+  box-shadow: 0 0 12px rgba(255, 43, 43, 0.3);
+}
+
+.target-cursor.is-locked .target-cursor__center {
+  transform: scale(1.4);
+}
+
+/* Automatically disable on mobile / coarse pointers */
+@media (hover: none) or (pointer: coarse) {
+  .target-cursor-wrapper {
+    display: none !important;
+  }
+  html.hide-default-cursor,
+  html.hide-default-cursor * {
+    cursor: auto !important;
+  }
+}

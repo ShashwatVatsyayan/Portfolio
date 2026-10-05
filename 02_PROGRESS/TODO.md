@@ -1,0 +1,41 @@
+# Implementation Checklist & Tasks
+
+- [x] Lanyard Intro Experience:
+  - [x] Full-screen interactive Lanyard gateway placed before the main portfolio.
+  - [x] Generated procedural assets: `assets/lanyard/card.glb`, `assets/lanyard/lanyard.png`, `assets/lanyard/card-front.png`, `assets/lanyard/card-back.png`, and root aliases `card.glb`, `lanyard.png`.
+  - [x] Customized card front with Shashwat Vatsyayan's verified identity, developer/creative disciplines, and portfolio access badge.
+  - [x] Customized card back with CSE identity and subtle prompt "DRAG TO EXPLORE · CLICK TO ENTER".
+  - [x] Natural pendulum and Verlet band physics with drag/tilt interaction.
+  - [x] Smooth 1000ms cinematic transition revealing the main portfolio and fading in navigation.
+  - [x] Unmounting/cleanup of Lanyard WebGL resources after entering.
+  - [x] Fallback static card for non-WebGL/noscript environments.
+  - [x] Navigation bar initially hidden, revealed only upon portfolio entrance.
+- [x] `ClickSpark` Global Interaction:
+  - [x] Component implemented in `06_SRC/components/ClickSpark/ClickSpark.js` & `.css`.
+  - [x] Subtle white spark burst (`sparkCount: 8`, `sparkSize: 10`, `sparkRadius: 15`, `duration: 400ms`).
+  - [x] Strict zero-interference design (`pointer-events: none`).
+  - [x] Enabled primarily after the portfolio is entered.
+- [x] `ScrollReveal` Heading & Statement Tuning:
+  - [x] Configured with `baseOpacity: 0`, `enableBlur: true`, `baseRotation: 5`, `blurStrength: 10`.
+  - [x] Applied to About: `"I build technology while working across creative media and visual storytelling."`
+  - [x] Applied to Selected Work: `"Software, AI and creative technology built around ideas worth exploring."`
+  - [x] Applied to Creative: `"Technology and visual storytelling are not separate disciplines."`
+  - [x] Applied to Collaboration: `"Have an idea worth building?"`
+- [x] Hero Frame Compositor:
+  - [x] Contain aspect-ratio preservation with complete camera movement intact.
+  - [x] 48px lateral soft edge feathering eliminates harsh side cropping.
+  - [x] Zero artificial dark eye overlays; authentic video eye frames.
+- [x] 3D Project Carousel:
+  - [x] Mathematically centered on visual stage axis.
+  - [x] Guaranteed 0px horizontal page overflow.
+- [x] Experience Section:
+  - [x] 01: Office of Academic Affairs, Chandigarh University (`Central Team` <-> `[PixelSwap]` hover `Social Media Executive`).
+  - [x] 02: ViproTech Digital, Industrial Training (`[DecryptedText]` reveals `CYBER SECURITY`).
+- [x] Bottom Signature & Footer:
+  - [x] `FallingText` 2D physics playground.
+  - [x] `ScrollVelocity` typography stream.
+  - [x] `ShinyText` signature identity `SHASHWAT VATSYAYAN`.
+  - [x] Clean footer with dynamic year.
+- [x] System Verification:
+  - [x] All 27 HTTP asset endpoints return HTTP 200 OK.
+  - [x] Zero JavaScript errors or broken imports.

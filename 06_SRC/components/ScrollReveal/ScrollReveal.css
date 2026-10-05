@@ -1,0 +1,32 @@
+/* ═══════════════════════════════════════════════════════════
+   SCROLL REVEAL COMPONENT
+   Subtle editorial text reveal: opacity + blur reduction + micro-tilt correction
+   ═══════════════════════════════════════════════════════════ */
+
+.scroll-reveal {
+  display: inline-block;
+  opacity: var(--sr-base-opacity, 0);
+  filter: blur(var(--sr-blur, 10px));
+  transform: translateY(16px) rotateX(var(--sr-rot, 5deg));
+  transform-origin: 50% 100%;
+  will-change: transform, opacity, filter;
+  transition: 
+    opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-reveal.is-revealed {
+  opacity: 1 !important;
+  filter: blur(0px) !important;
+  transform: translateY(0) rotateX(0deg) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

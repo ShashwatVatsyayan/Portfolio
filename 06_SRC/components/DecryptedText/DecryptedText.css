@@ -1,0 +1,31 @@
+/* ═══════════════════════════════════════════════════════════
+   DECRYPTED TEXT COMPONENT
+   Cybernetic monospace character deciphering effect
+   ═══════════════════════════════════════════════════════════ */
+
+.decrypted-text-container {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--mono, 'Space Grotesk', monospace);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.decrypted-char {
+  display: inline-block;
+  min-width: 0.65em;
+  text-align: center;
+  transition: color 0.15s ease, opacity 0.15s ease;
+}
+
+.decrypted-char.encrypted {
+  color: var(--blood-hot, #ff2b2b);
+  opacity: 0.75;
+  text-shadow: 0 0 10px rgba(255, 43, 43, 0.45);
+}
+
+.decrypted-char.revealed {
+  color: #ffffff;
+  opacity: 1;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
+}

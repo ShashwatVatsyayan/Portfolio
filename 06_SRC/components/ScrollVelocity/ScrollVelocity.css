@@ -1,0 +1,131 @@
+/* ═══════════════════════════════════════════════════════════
+   SCROLL VELOCITY — KINETIC HORIZONTAL SCROLL TEXT STREAMS
+   ═══════════════════════════════════════════════════════════ */
+
+.scroll-velocity-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: clamp(3rem, 6vh, 5rem) 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.scroll-velocity-line {
+  position: relative;
+  display: flex;
+  white-space: nowrap;
+  margin: 0.75rem 0;
+  overflow: hidden;
+}
+
+.scroll-velocity-track {
+  display: flex;
+  white-space: nowrap;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  will-change: transform;
+}
+
+.scroll-velocity-text {
+  font-family: var(--serif, 'Shippori Mincho', serif);
+  font-size: clamp(2.4rem, 6.5vw, 5.8rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(232, 228, 220, 0.28);
+  transition: -webkit-text-stroke-color 0.3s ease, color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(1.5rem, 3vw, 3rem);
+}
+
+.scroll-velocity-text.text-filled {
+  color: #ffffff;
+  -webkit-text-stroke: 0px transparent;
+}
+
+.scroll-velocity-text.text-crimson {
+  color: var(--blood-hot, #ff2b2b);
+  -webkit-text-stroke: 0px transparent;
+  text-shadow: 0 0 35px rgba(255, 43, 43, 0.3);
+}
+
+.scroll-velocity-sep {
+  display: inline-block;
+  font-family: var(--mono, 'Space Grotesk', monospace);
+  font-size: clamp(0.9rem, 1.8vw, 1.6rem);
+  color: var(--blood-hot, #ff2b2b);
+  opacity: 0.6;
+}
+
+/* Collaboration CTA Body & Cards */
+.collab-section {
+  position: relative;
+  width: 100%;
+  padding: clamp(5rem, 10vh, 8rem) 0 clamp(4rem, 8vh, 6rem);
+  background: radial-gradient(circle at 50% 20%, rgba(20, 7, 9, 0.95), #000000 80%);
+  border-top: 1px solid rgba(255, 43, 43, 0.15);
+  overflow: hidden;
+}
+
+.collab-content {
+  position: relative;
+  max-width: 900px;
+  margin: 3rem auto 0;
+  text-align: center;
+  padding: 0 clamp(1.5rem, 4vw, 3rem);
+}
+
+.collab-subhead {
+  font-family: var(--serif, 'Shippori Mincho', serif);
+  font-size: clamp(1.2rem, 2.2vw, 1.8rem);
+  line-height: 1.6;
+  color: rgba(232, 228, 220, 0.85);
+  margin-bottom: 2.8rem;
+}
+
+.collab-links-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.collab-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.1rem 2.2rem;
+  font-family: var(--mono, 'Space Grotesk', monospace);
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 999px;
+  background: rgba(18, 18, 24, 0.8);
+  border: 1px solid rgba(232, 228, 220, 0.16);
+  color: rgba(232, 228, 220, 0.85);
+  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  backdrop-filter: blur(8px);
+}
+
+.collab-link-btn svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+}
+
+.collab-link-btn:hover {
+  background: rgba(255, 43, 43, 0.12);
+  border-color: var(--blood-hot, #ff2b2b);
+  color: #ffffff;
+  box-shadow: 0 0 25px rgba(255, 43, 43, 0.28);
+  transform: translateY(-3px);
+}
+
+.collab-link-btn:hover svg {
+  transform: translate(2px, -2px);
+}

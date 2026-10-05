@@ -1,0 +1,226 @@
+/* ═══════════════════════════════════════════════════════════
+   LANYARD INTRO COMPONENT
+   Full-screen 3D interactive physics access badge gateway
+   ═══════════════════════════════════════════════════════════ */
+
+.lanyard-intro {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10000;
+  background: #040406;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: 
+    opacity 1.1s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.1s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.lanyard-intro.is-exiting {
+  opacity: 0;
+  transform: scale(1.04);
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+.lanyard-intro.is-hidden {
+  display: none !important;
+}
+
+/* Atmospheric subtle crimson background glow */
+.lanyard-ambient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: 
+    radial-gradient(circle 800px at 50% 40%, rgba(214, 32, 44, 0.08), transparent 75%),
+    radial-gradient(circle 1200px at 50% 90%, rgba(10, 10, 14, 0.9), transparent 85%);
+  z-index: 1;
+}
+
+/* Independent Full-Screen Centered 3D Physics Stage */
+.lanyard-stage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  cursor: grab;
+  touch-action: none;
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+.lanyard-stage:active {
+  cursor: grabbing;
+}
+
+.lanyard-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+/* Independent Floating Overlay Text (Pointer events pass through to 3D stage) */
+.lanyard-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Top Subtle Eyebrow */
+.lanyard-topbar {
+  padding-top: clamp(1.8rem, 4vh, 2.8rem);
+  text-align: center;
+  pointer-events: none;
+}
+
+.lanyard-badge-mark {
+  font-family: var(--mono, 'Space Grotesk', monospace);
+  font-size: clamp(0.62rem, 0.85vw, 0.75rem);
+  letter-spacing: 0.42em;
+  color: rgba(232, 228, 220, 0.6);
+  text-transform: uppercase;
+}
+
+.lanyard-badge-mark span {
+  color: var(--blood-hot, #ff2b2b);
+}
+
+/* Bottom Instruction & Identity Callout */
+.lanyard-bottombar {
+  padding-bottom: clamp(2rem, 5vh, 3.5rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  text-align: center;
+  pointer-events: none;
+}
+
+.lanyard-identity-title {
+  font-family: var(--display, 'Cabinet Grotesk', sans-serif);
+  font-weight: 800;
+  font-size: clamp(1.4rem, 3.2vw, 2.2rem);
+  letter-spacing: 0.16em;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin: 0;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.85);
+  pointer-events: none;
+}
+
+.lanyard-hint-box {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 0.55rem 1.4rem;
+  background: rgba(14, 14, 18, 0.7);
+  border: 1px solid rgba(232, 228, 220, 0.14);
+  border-radius: 30px;
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.lanyard-hint-box:hover {
+  border-color: var(--blood-hot, #ff2b2b);
+  background: rgba(25, 15, 18, 0.85);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(255, 43, 43, 0.18);
+}
+
+.lanyard-instruction {
+  font-family: var(--mono, 'Space Grotesk', monospace);
+  font-size: clamp(0.58rem, 0.8vw, 0.68rem);
+  letter-spacing: 0.32em;
+  color: rgba(232, 228, 220, 0.85);
+  text-transform: uppercase;
+}
+
+.lanyard-enter-arrow {
+  color: var(--blood-hot, #ff2b2b);
+  font-size: 0.9rem;
+  transition: transform 0.3s ease;
+}
+
+.lanyard-hint-box:hover .lanyard-enter-arrow {
+  transform: translateX(4px);
+}
+
+/* Fallback Card for Non-WebGL */
+.lanyard-fallback-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(260px, 28vw, 340px);
+  height: clamp(390px, 42vh, 480px);
+  border-radius: 16px;
+  background: #0d0d12;
+  border: 1px solid rgba(232, 228, 220, 0.18);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.95);
+  overflow: hidden;
+  z-index: 2;
+  cursor: pointer;
+  transition: transform 0.4s ease, border-color 0.4s ease;
+}
+
+.lanyard-fallback-card:hover {
+  border-color: var(--blood-hot, #ff2b2b);
+  transform: translate(-50%, -52%) scale(1.02);
+}
+
+.lanyard-fallback-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Initially hide chrome navigation, main portfolio, hints, and rails until portfolio entered */
+body.lanyard-active main,
+body.lanyard-active .chrome,
+body.lanyard-active .hint,
+body.lanyard-active .rail,
+body.lanyard-active .sticky-badge,
+body.lanyard-active .loader {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+body.lanyard-active .chrome {
+  transform: translateY(-15px) !important;
+}
+
+main {
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.chrome {
+  transition: opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s !important;
+}
+
+.hint,
+.rail {
+  transition: opacity 0.8s ease 0.5s !important;
+}

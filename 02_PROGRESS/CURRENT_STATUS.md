@@ -1,0 +1,38 @@
+# Current Project Status
+
+- **Status**: Complete, Verified & Production-Ready
+- **Entry Experience (Lanyard Intro Gateway)**:
+  - First screen is an interactive full-screen 3D access badge suspended from a flexible woven lanyard strap (`06_SRC/components/Lanyard/`).
+  - Assets generated: `assets/lanyard/card.glb`, `assets/lanyard/lanyard.png`, `assets/lanyard/card-front.png`, `assets/lanyard/card-back.png`, plus root aliases `card.glb` and `lanyard.png`.
+  - Custom design:
+    - **Front**: `SHASHWAT VATSYAYAN` · `DEVELOPER · CREATIVE TECHNOLOGIST · FILMMAKER` · `DIGITAL IDENTITY // 2026` · `PORTFOLIO ACCESS`.
+    - **Back**: `SHASHWAT VATSYAYAN` · `CSE · DEVELOPER · CREATIVE TECHNOLOGIST` · `DRAG TO EXPLORE · CLICK TO ENTER PORTFOLIO`.
+  - Natural physics: Verlet integration chain for the woven lanyard band and 3D pendulum dynamics for the card with realistic mass, angular inertia, and drag elasticity.
+  - Seamless cinematic transition: on click or intentional drag/release, the card settles, lanyard fades out with soft scale/blur (800–1200ms), navigation fades in, and the cinematic hero begins. The 3D Lanyard loop automatically pauses and unmounts, freeing 100% of GPU resources.
+  - Navigation initially hidden until the portfolio is entered.
+- **Global Click Interaction (`ClickSpark`)**:
+  - Emits subtle white sparks (`sparkCount: 8`, `sparkSize: 10`, `sparkRadius: 15`, `duration: 400ms`) upon user clicks (`06_SRC/components/ClickSpark/`).
+  - Strict zero-interference design (`pointer-events: none`): never interferes with text selection, drag interactions, Lanyard physics, carousel dragging, scrolling, or form inputs.
+  - Active primarily after the portfolio is entered.
+- **Main Headings & Editorial Statements (`ScrollReveal`)**:
+  - Re-tuned with exact reference values: `baseOpacity = 0`, `enableBlur = true`, `baseRotation = 5`, `blurStrength = 10`.
+  - Applied to the 4 requested statements:
+    - **About**: `"I build technology while working across creative media and visual storytelling."`
+    - **Selected Work**: `"Software, AI and creative technology built around ideas worth exploring."`
+    - **Creative**: `"Technology and visual storytelling are not separate disciplines."`
+    - **Collaboration**: `"Have an idea worth building?"`
+- **Hero Frame Compositor**:
+  - Preserved uncropped framing: Full Shot -> Push In -> Close-Up -> Sharingan -> Mangekyō -> Pull Back -> Full Shot.
+  - 48px lateral soft edge feathering eliminates harsh vertical side boundaries.
+  - Zero artificial dark eye overlays; 100% authentic video eye frames.
+- **Project Carousel**:
+  - 3D cylindrical geometry centered on visual axis; 0px horizontal page overflow.
+- **Experience Section**:
+  - 01: Office of Academic Affairs, Chandigarh University (`Central Team` <-> `[PixelSwap]` hover `Social Media Executive`).
+  - 02: ViproTech Digital, Industrial Training (`[DecryptedText]` reveals `CYBER SECURITY`).
+- **Interactive Bottom**:
+  - `FallingText` 2D physics typographic playground.
+  - `ScrollVelocity` velocity-coupled marquee.
+  - `ShinyText` signature identity `SHASHWAT VATSYAYAN`.
+  - Clean footer with dynamic year.
+- **Endpoint Verification**: All 27 HTTP endpoints verified returning HTTP 200 OK.

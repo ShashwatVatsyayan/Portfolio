@@ -1,0 +1,117 @@
+/* ═══════════════════════════════════════════════════════════
+   PIXEL SWAP — HOVER-TRIGGERED PIXELATED ROLE TRANSITION
+   ═══════════════════════════════════════════════════════════ */
+
+.pixel-swap-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 8px;
+  background: rgba(14, 14, 18, 0.6);
+  border: 1px solid rgba(232, 228, 220, 0.12);
+  padding: 0.8rem 1.8rem;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.pixel-swap-container:hover {
+  border-color: rgba(255, 43, 43, 0.6);
+  box-shadow: 0 0 25px rgba(255, 43, 43, 0.2);
+}
+
+.pixel-swap-viewport {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  min-width: 260px;
+}
+
+.pixel-swap-layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1), transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.pixel-swap-layer--first {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.pixel-swap-layer--second {
+  opacity: 0;
+  transform: scale(0.96);
+  pointer-events: none;
+}
+
+.pixel-swap-container.is-swapped .pixel-swap-layer--first {
+  opacity: 0;
+  transform: scale(0.96);
+  pointer-events: none;
+}
+
+.pixel-swap-container.is-swapped .pixel-swap-layer--second {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+/* Pixel Grid Overlay */
+.pixel-swap-grid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.pixel-block {
+  background: var(--blood-hot, #ff2b2b);
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity 0.22s ease, transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pixel-swap-container.is-animating .pixel-block {
+  opacity: 0.85;
+  transform: scale(1);
+}
+
+/* Role Typography */
+.role-text-first {
+  font-family: var(--serif, 'Shippori Mincho', serif);
+  font-weight: 700;
+  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+  letter-spacing: 0.12em;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.role-badge-tag {
+  font-family: var(--mono, 'Space Grotesk', monospace);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  color: var(--blood-hot, #ff2b2b);
+  border: 1px solid rgba(255, 43, 43, 0.4);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+.role-text-second {
+  font-family: var(--serif, 'Shippori Mincho', serif);
+  font-weight: 800;
+  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+  letter-spacing: 0.12em;
+  color: var(--blood-hot, #ff2b2b);
+  text-shadow: 0 0 16px rgba(255, 43, 43, 0.4);
+}

@@ -1,0 +1,194 @@
+/* ═══════════════════════════════════════════════════════════
+   CINEMATIC JAPANESE CHARACTER LOADER GATEWAY
+   High-speed character decryption transition between Lanyard & Portfolio
+   ═══════════════════════════════════════════════════════════ */
+
+.jp-loader {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10002;
+  background: #040406;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: 
+    opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0.45s;
+}
+
+.jp-loader.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.jp-loader.is-exiting {
+  opacity: 0;
+  transform: scale(1.03);
+  filter: blur(8px);
+  pointer-events: none;
+  transition: 
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.jp-loader.is-hidden {
+  display: none !important;
+}
+
+/* Atmospheric Ambient Glow */
+.jp-loader-ambient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: 
+    radial-gradient(circle 600px at 50% 50%, rgba(214, 32, 44, 0.12), transparent 75%),
+    radial-gradient(circle 900px at 50% 85%, rgba(10, 10, 14, 0.95), transparent 85%);
+  z-index: 1;
+}
+
+/* Centered Cipher Matrix Container */
+.jp-loader-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 1.5rem;
+  max-width: 640px;
+}
+
+/* Top System Badge */
+.jp-loader-badge {
+  font-family: var(--mono, 'Space Grotesk', monospace);
+  font-size: clamp(0.62rem, 0.8vw, 0.72rem);
+  letter-spacing: 0.45em;
+  color: rgba(232, 228, 220, 0.6);
+  text-transform: uppercase;
+  margin-bottom: clamp(1.8rem, 3.5vh, 2.5rem);
+}
+
+.jp-loader-badge span {
+  color: var(--blood-hot, #ff2b2b);
+}
+
+/* Dynamic Japanese Cipher Characters Grid */
+.jp-loader-matrix {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.7rem, 2vw, 1.6rem);
+  margin-bottom: clamp(1.8rem, 3.5vh, 2.5rem);
+}
+
+.jp-char-box {
+  width: clamp(48px, 9vw, 76px);
+  height: clamp(64px, 12vw, 98px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(14, 14, 20, 0.85);
+  border: 1px solid rgba(232, 228, 220, 0.12);
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  position: relative;
+  overflow: hidden;
+  transition: 
+    border-color 0.3s ease,
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.jp-char-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 43, 43, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.jp-char-box.is-resolved {
+  border-color: rgba(255, 43, 43, 0.65);
+  background: rgba(26, 14, 18, 0.95);
+  box-shadow: 0 0 25px rgba(255, 43, 43, 0.25);
+}
+
+.jp-char-box.is-resolved::before {
+  background: var(--blood-hot, #ff2b2b);
+}
+
+.jp-char {
+  font-family: var(--serif, 'Shippori Mincho', 'Cinzel', serif);
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  font-weight: 700;
+  color: #f0edf6;
+  text-shadow: 0 0 18px rgba(255, 255, 255, 0.3);
+  transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.15s ease;
+}
+
+.jp-char-box.is-resolved .jp-char {
+  color: var(--blood-hot, #ff2b2b);
+  text-shadow: 0 0 25px rgba(255, 43, 43, 0.85), 0 0 45px rgba(255, 43, 43, 0.4);
+  transform: scale(1.04);
+}
+
+/* Status Indicator */
+.jp-loader-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  margin-bottom: 1.2rem;
+}
+
+.jp-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--blood-hot, #ff2b2b);
+  box-shadow: 0 0 10px var(--blood-hot, #ff2b2b);
+  animation: pulseDot 1.2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 0.4; transform: scale(0.85); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.jp-status-text {
+  font-family: var(--mono, 'Space Grotesk', monospace);
+  font-size: clamp(0.58rem, 0.75vw, 0.68rem);
+  letter-spacing: 0.35em;
+  color: rgba(232, 228, 220, 0.75);
+  text-transform: uppercase;
+}
+
+/* Minimal Hairline Progress Bar */
+.jp-loader-progress {
+  width: clamp(200px, 45vw, 340px);
+  height: 2px;
+  background: rgba(232, 228, 220, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.jp-loader-progress-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #8a151b, #ff2b2b);
+  box-shadow: 0 0 12px #ff2b2b;
+  transition: width 0.1s linear;
+}

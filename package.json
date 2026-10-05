@@ -1,0 +1,21 @@
+{
+  "name": "shashwat-vatsyayan-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cinematic Canvas Frame-Based Personal Portfolio of Shashwat Vatsyayan",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "extract-frames": "python 05_ORCHESTRATION/extract_frames.py"
+  },
+  "keywords": [
+    "portfolio",
+    "canvas",
+    "cinematic",
+    "developer",
+    "creative-technologist",
+    "filmmaker"
+  ],
+  "author": "Shashwat Vatsyayan",
+  "license": "UNLICENSED"
+}
